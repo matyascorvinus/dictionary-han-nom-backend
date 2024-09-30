@@ -112,3 +112,22 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=40)
+
+# Database model, database table inferred from class name
+class HanCharacter(SQLModel, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    han_character: str | None = Field(default=None, index=True)
+    english_translation: str | None = Field(default=None, index=True)
+    nom_character: str | None = Field(default=None, index=True)
+    quoc_ngu: str | None = Field(default=None, index=True)
+    source_text: str | None = Field(default=None, index=True)
+
+# Database model, database table inferred from class name
+class HanText(SQLModel, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    han_character: str | None = Field(default=None, index=True)
+    english_translation: str | None = Field(default=None, index=True)
+    nom_character: str | None = Field(default=None, index=True)
+    quoc_ngu: str | None = Field(default=None, index=True)
+    source_text: str | None = Field(default=None, index=True)
+
