@@ -1,0 +1,120 @@
+{
+    "info": {
+      "name": "Dictionary Han Nom API - Login",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Login - Access Token",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/login/access-token",
+            "host": ["{{base_url}}"],
+            "path": ["login", "access-token"]
+          },
+          "body": {
+            "mode": "urlencoded",
+            "urlencoded": [
+              {
+                "key": "username",
+                "value": "user@example.com",
+                "type": "text"
+              },
+              {
+                "key": "password",
+                "value": "userpassword",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Test Token",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{access_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/login/test-token",
+            "host": ["{{base_url}}"],
+            "path": ["login", "test-token"]
+          }
+        }
+      },
+      {
+        "name": "Password Recovery",
+        "request": {
+          "method": "POST",
+          "url": {
+            "raw": "{{base_url}}/password-recovery/user@example.com",
+            "host": ["{{base_url}}"],
+            "path": ["password-recovery", "user@example.com"]
+          }
+        }
+      },
+      {
+        "name": "Reset Password",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/reset-password/",
+            "host": ["{{base_url}}"],
+            "path": ["reset-password", ""]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"token\": \"password_reset_token_here\",\n    \"new_password\": \"new_password_here\"\n}"
+          }
+        }
+      },
+      {
+        "name": "Password Recovery HTML Content (Superuser only)",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{access_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/password-recovery-html-content/user@example.com",
+            "host": ["{{base_url}}"],
+            "path": ["password-recovery-html-content", "user@example.com"]
+          }
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost/api",
+        "type": "string"
+      },
+      {
+        "key": "access_token",
+        "value": "your_access_token_here",
+        "type": "string"
+      }
+    ]
+  }

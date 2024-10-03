@@ -2,6 +2,7 @@ import uuid
 from typing import Any
 
 from sqlmodel import Session, select, col, SQLModel, or_
+from sqlalchemy import func
 
 from app.core.security import get_password_hash, verify_password
 from app.models import Item, ItemCreate, User, UserCreate, UserUpdate, HanCharacter, HanText
@@ -84,19 +85,25 @@ def update_han_text(*, session: Session, han_text: HanText, han_text_in: HanText
     return han_text
 
 def get_han_character(*, session: Session, search_word: str, skip: int = 0, limit: int = 100) -> list[HanCharacter] | None:
+    search_word = search_word.lower()
     statement = select(HanCharacter) \
-        .where(or_(col(HanCharacter.han_character).contains(search_word), 
-                   col(HanCharacter.english_translation).contains(search_word), 
-                   col(HanCharacter.quoc_ngu).contains(search_word), 
-                   col(HanCharacter.nom_character).contains(search_word))).offset(skip).limit(limit)
+        .where(or_(
+            func.lower(col(HanCharacter.han_character)).contains(search_word),
+            func.lower(col(HanCharacter.english_translation)).contains(search_word),
+            func.lower(col(HanCharacter.quoc_ngu)).contains(search_word),
+            func.lower(col(HanCharacter.nom_character)).contains(search_word)
+        )).offset(skip).limit(limit)
     data = session.exec(statement)
     return data
 
 def get_han_text(*, session: Session, search_word: str, skip: int = 0, limit: int = 100) -> list[HanText] | None:
+    search_word = search_word.lower()
     statement = select(HanText) \
-        .where(or_(col(HanText.han_character).contains(search_word), 
-                   col(HanText.english_translation).contains(search_word), 
-                   col(HanText.quoc_ngu).contains(search_word), 
-                   col(HanText.nom_character).contains(search_word))).offset(skip).limit(limit)
+        .where(or_(
+            func.lower(col(HanText.han_character)).contains(search_word),
+            func.lower(col(HanText.english_translation)).contains(search_word),
+            func.lower(col(HanText.quoc_ngu)).contains(search_word),
+            func.lower(col(HanText.nom_character)).contains(search_word)
+        )).offset(skip).limit(limit)
     data = session.exec(statement)
     return data

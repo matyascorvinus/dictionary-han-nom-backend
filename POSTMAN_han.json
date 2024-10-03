@@ -1,0 +1,145 @@
+{
+    "info": {
+      "name": "Han Character API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Read Han Characters",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{access_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/han_character/?search_word=example&skip=0&limit=100",
+            "host": ["{{base_url}}"],
+            "path": ["han_character", ""],
+            "query": [
+              {
+                "key": "search_word",
+                "value": "example"
+              },
+              {
+                "key": "skip",
+                "value": "0"
+              },
+              {
+                "key": "limit",
+                "value": "100"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Read Han Character by ID",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{access_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/han_character/{{han_character_id}}",
+            "host": ["{{base_url}}"],
+            "path": ["han_character", "{{han_character_id}}"]
+          }
+        }
+      }, 
+      
+    {
+      "name": "Create Han Character",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"han_character\": \"漢\",\n  \"english_translation\": \"Chinese\",\n  \"nom_character\": \"漢\",\n  \"quoc_ngu\": \"Hán\",\n  \"source_text\": \"Example source\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/han_character/",
+          "host": ["{{base_url}}"],
+          "path": ["han_character", ""]
+        }
+      }
+    },
+    {
+      "name": "Update Han Character",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"han_character\": \"漢\",\n  \"english_translation\": \"Chinese (updated)\",\n  \"nom_character\": \"漢\",\n  \"quoc_ngu\": \"Hán\",\n  \"source_text\": \"Updated example source\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/han_character/{{han_character_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["han_character", "{{han_character_id}}"]
+        }
+      }
+    },
+      {
+        "name": "Delete Han Character",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{access_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/han_character/{{han_character_id}}",
+            "host": ["{{base_url}}"],
+            "path": ["han_character", "{{han_character_id}}"]
+          }
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost:8000/api/v1"
+      },
+      {
+        "key": "access_token",
+        "value": "your_access_token_here"
+      },
+      {
+        "key": "han_character_id",
+        "value": "00000000-0000-0000-0000-000000000000"
+      }
+    ]
+  }
